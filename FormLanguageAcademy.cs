@@ -70,11 +70,11 @@ namespace LanguageAcademy
             connect.Close();
         }
 
-        private void DeleteBoxes()
+        public void DeleteBoxes()
         {
             txt_name.Text = string.Empty;
             txt_lastName.Text = string.Empty;
-            txt_gender.Text = string.Empty;
+            txt_gender.SelectedItem = string.Empty;
             txt_birthDate.Text = string.Empty;
             txt_phone.Text = string.Empty;
             txt_eMail.Text = string.Empty;
@@ -146,7 +146,7 @@ namespace LanguageAcademy
             txt_birthDate.Text = null;
         }
 
-        private void Refresh()
+        public void Refresh()
         {
             connect.Open();
             SqlCommand studentId = new SqlCommand("Select Count(StudentId) from Students", connect);

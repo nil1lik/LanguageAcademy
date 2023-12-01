@@ -16,7 +16,7 @@ namespace LanguageAcademy
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormLanguageAcademy());
+            Application.Run(new LoginForm());
         }
     }
 }

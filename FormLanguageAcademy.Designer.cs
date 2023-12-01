@@ -268,10 +268,11 @@
             // txt_birthDate
             // 
             this.txt_birthDate.Location = new System.Drawing.Point(166, 208);
-            this.txt_birthDate.Mask = "0000/00/00";
+            this.txt_birthDate.Mask = "00/00/0000";
             this.txt_birthDate.Name = "txt_birthDate";
             this.txt_birthDate.Size = new System.Drawing.Size(206, 27);
             this.txt_birthDate.TabIndex = 25;
+            this.txt_birthDate.ValidatingType = typeof(System.DateTime);
             // 
             // txt_gender
             // 
@@ -352,7 +353,7 @@
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "FormLanguageAcademy";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Welcome";
+            this.Text = "Welcome to Language Academy";
             this.Load += new System.EventHandler(this.FormLanguageAcademy_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataList)).EndInit();
             this.ResumeLayout(false);
