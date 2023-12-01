@@ -24,6 +24,7 @@ namespace LanguageAcademy
         public void btn_list_Click(object sender, EventArgs e)
         {
             Listed();
+            DeleteBoxes();
             MessageBox.Show("Students listed!");
         }
         void Listed()
@@ -42,7 +43,7 @@ namespace LanguageAcademy
             add.Parameters.AddWithValue("@p1", txt_name.Text);
             add.Parameters.AddWithValue("@p2", txt_lastName.Text);
             add.Parameters.AddWithValue("@p3", txt_gender.Text);
-            add.Parameters.AddWithValue("@p4", txt_birthDate.TextMaskFormat);
+            add.Parameters.AddWithValue("@p4", txt_birthDate.Text);
             add.Parameters.AddWithValue("@p5", txt_phone.Text);
             add.Parameters.AddWithValue("@p6", txt_eMail.Text);
             add.Parameters.AddWithValue("@p7", txt_country.Text);
@@ -50,18 +51,18 @@ namespace LanguageAcademy
 
             if (txt_name.TextLength < 2 || txt_lastName.TextLength < 2)
             {
-                MessageBox.Show("2 karakterden büyük olmalıdır.");
+                MessageBox.Show("Username and surname must be greater than two characters!", "Information", MessageBoxButtons.OK);
             }
             if (txt_phone.TextLength < 10 || txt_phone.TextLength > 10)
             {
-                MessageBox.Show("Tel no 10 rakamdan oluşmalıdır!");
+                MessageBox.Show("The phone number must consist of ten digits!", "Information", MessageBoxButtons.OK);
             }
             else if (txt_name.TextLength >= 2 && txt_lastName.TextLength >= 2 && txt_phone.TextLength == 10)
             {
                 add.ExecuteNonQuery();
                 DeleteBoxes();
                 connect.Close();
-                MessageBox.Show("Student Added!", "Information"+txt_phone.TextLength, MessageBoxButtons.OK);
+                MessageBox.Show("Student Added!", "Information", MessageBoxButtons.OK);
                 DeleteBoxes();
                 Refresh();
                 Listed();
@@ -71,7 +72,6 @@ namespace LanguageAcademy
 
         private void DeleteBoxes()
         {
-            txt_id.Text = string.Empty;
             txt_name.Text = string.Empty;
             txt_lastName.Text = string.Empty;
             txt_gender.Text = string.Empty;
@@ -101,7 +101,7 @@ namespace LanguageAcademy
             delete.ExecuteNonQuery();
             DeleteBoxes();
             connect.Close();
-            MessageBox.Show("Student Deleted!");
+            MessageBox.Show("Student Deleted!", "Information", MessageBoxButtons.OK);
             Refresh();
             Listed();
         }
@@ -109,11 +109,11 @@ namespace LanguageAcademy
         private void btn_update_Click(object sender, EventArgs e)
         {
             connect.Open();
-            SqlCommand update = new SqlCommand("insert into Students (StudentName, StudentLastName, StudentGender, StudentBirthDate, StudentPhone, StudentEMail, StudentCountry) values (@p1, @p2, @p3, @p4, @p5, @p6, @p7)", connect);
+            SqlCommand update = new SqlCommand("Update Students set StudentName=@p1, StudentLastName=@p2, StudentGender=@p3, StudentBirthDate=@p4, StudentPhone=@p5, StudentEMail=@p6, StudentCountry=@p7 where StudentId=@p8", connect);
             update.Parameters.AddWithValue("@p1", txt_name.Text);
             update.Parameters.AddWithValue("@p2", txt_lastName.Text);
             update.Parameters.AddWithValue("@p3", txt_gender.Text);
-            update.Parameters.AddWithValue("@p4", txt_birthDate.TextMaskFormat);
+            update.Parameters.AddWithValue("@p4", txt_birthDate.Text);
             update.Parameters.AddWithValue("@p5", txt_phone.Text);
             update.Parameters.AddWithValue("@p6", txt_eMail.Text);
             update.Parameters.AddWithValue("@p7", txt_country.Text);
@@ -121,18 +121,18 @@ namespace LanguageAcademy
 
             if (txt_name.TextLength < 2 || txt_lastName.TextLength < 2)
             {
-                MessageBox.Show("2 karakterden büyük olmalıdır.");
+                MessageBox.Show("Username and surname must be greater than two characters!", "Information", MessageBoxButtons.RetryCancel);
             }
             if (txt_phone.TextLength < 10 || txt_phone.TextLength > 10)
             {
-                MessageBox.Show("Tel no 10 rakamdan oluşmalıdır!");
+                MessageBox.Show("The phone number must consist of ten digits!", "Information", MessageBoxButtons.RetryCancel);
             }
             else if (txt_name.TextLength >= 2 && txt_lastName.TextLength >= 2 && txt_phone.TextLength == 10)
             {
                 update.ExecuteNonQuery();
                 DeleteBoxes();
                 connect.Close();
-                MessageBox.Show("Student Added!", "Information" + txt_phone.TextLength, MessageBoxButtons.OK);
+                MessageBox.Show("Student Updated!", "Information", MessageBoxButtons.OK);
                 Refresh();
                 Listed();
             }
@@ -142,14 +142,14 @@ namespace LanguageAcademy
 
         private void FormLanguageAcademy_Load(object sender, EventArgs e)
         {
-            txt_birthDate.Text = null;
             Refresh();
+            txt_birthDate.Text = null;
         }
 
         private void Refresh()
         {
             connect.Open();
-            SqlCommand studentId = new SqlCommand("select Count(StudentId) from Students", connect);
+            SqlCommand studentId = new SqlCommand("Select Count(StudentId) from Students", connect);
             var studentNum = studentId.ExecuteScalar();
             lbl_num.Text = studentNum.ToString();
             connect.Close();

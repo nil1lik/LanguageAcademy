@@ -247,6 +247,7 @@
             this.txt_id.Location = new System.Drawing.Point(165, 39);
             this.txt_id.Margin = new System.Windows.Forms.Padding(5);
             this.txt_id.Name = "txt_id";
+            this.txt_id.ReadOnly = true;
             this.txt_id.Size = new System.Drawing.Size(207, 27);
             this.txt_id.TabIndex = 20;
             this.txt_id.Text = "Id is assigned automatically.";
@@ -346,9 +347,11 @@
             this.Cursor = System.Windows.Forms.Cursors.PanNW;
             this.Font = new System.Drawing.Font("Sylfaen", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.IndianRed;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "FormLanguageAcademy";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Welcome";
             this.Load += new System.EventHandler(this.FormLanguageAcademy_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataList)).EndInit();
